@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmhrvnbtjk1se"]
+[gd_scene load_steps=10 format=3 uid="uid://dmhrvnbtjk1se"]
 
 [ext_resource type="Script" uid="uid://debaleftw66sd" path="res://character_body_3d.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bpapmkiguqyj6" path="res://camera_3d.gd" id="1_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://by0hn0skj6gee" path="res://espaco4.jpeg" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dso5rjxpew2vj" path="res://SS1_FBX/SS1.fbx" id="2_h2yge"]
 
@@ -19,13 +20,16 @@ tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 1.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+radius = 0.02297871
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
 [node name="Main" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
-light_energy = 0.5
-shadow_enabled = true
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.15)
+script = ExtResource("1_1bvp3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7mycd")
@@ -33,8 +37,21 @@ environment = SubResource("Environment_7mycd")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 script = ExtResource("1_0xm2m")
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0.29999995, 0.09999999)
+light_energy = 0.5
+directional_shadow_mode = 0
+
 [node name="SS1" parent="CharacterBody3D" instance=ExtResource("2_h2yge")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.15)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.016477183, -0.003960192)
+shape = SubResource("SphereShape3D_h2yge")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.017, -0.078)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.099999964, 0, 0, 0, 2.1199994, 0, -0.1, -1.0599997)
+mesh = SubResource("BoxMesh_h2yge")
