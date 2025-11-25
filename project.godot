@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Void Dodge"
+config/name="VOID-DODGE"
 run/main_scene="uid://dmhrvnbtjk1se"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -18,4 +18,5 @@ config/icon="res://icon.svg"
 
 [rendering]
 
+textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
