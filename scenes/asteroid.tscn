@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1irp0w864a7k"]
+
+[ext_resource type="Script" uid="uid://dhtgv3fr2matv" path="res://scripts/asteroid.gd" id="1_6mo6b"]
+[ext_resource type="PackedScene" uid="uid://bs0xo0ffsbaqy" path="res://assets/8_low_poly_asteroid/sketchfab_scene.tscn" id="2_p0ukn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u87q6"]
+radius = 0.12939453
+height = 0.37963867
+
+[node name="asteroid" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["asteroid"]]
+script = ExtResource("1_6mo6b")
+
+[node name="Sketchfab_Scene" parent="StaticBody3D" instance=ExtResource("2_p0ukn")]
+transform = Transform3D(0.022, 0, 0, 0, 0.022, 0, 0, 0, 0.022, 0.052, -0.008, 0.006)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.22490278, 0.10917297, 0, -0.10917297, 0.22490278, -0.004795935, 0.00527954, 0)
+shape = SubResource("CapsuleShape3D_u87q6")
